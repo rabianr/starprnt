@@ -22,6 +22,7 @@ import com.starmicronics.starioextension.IConnectionCallback;
 import com.starmicronics.starioextension.StarIoExt;
 import com.starmicronics.starioextension.StarIoExt.Emulation;
 import com.starmicronics.starioextension.ICommandBuilder;
+import com.starmicronics.starioextension.ICommandBuilder.SoundChannel;
 import com.starmicronics.starioextension.ICommandBuilder.CutPaperAction;
 import com.starmicronics.starioextension.ICommandBuilder.CodePageType;
 import com.starmicronics.starioextension.StarIoExtManager;
@@ -930,6 +931,9 @@ public class StarPRNT extends CordovaPlugin {
                     } catch (IOException e) {
 
                     }
+                } else if (command.has("appendSound")) {
+                    int repeat = command.has("repeat") ? command.getInt("repeat") : 1;
+                    builder.appendSound(getSoundChannel(command.getString("appendSound")), repeat);
                 }
             }
 
@@ -1002,6 +1006,12 @@ public class StarPRNT extends CordovaPlugin {
         else if(logoSize.equals("DoubleHeight")) return ICommandBuilder.LogoSize.DoubleHeight;
         else if(logoSize.equals("DoubleWidthDoubleHeight")) return ICommandBuilder.LogoSize.DoubleWidthDoubleHeight;
         else return ICommandBuilder.LogoSize.Normal;
+    }
+
+    private ICommandBuilder.SoundChannel getSoundChannel(String soundChannel) {
+        if (soundChannel.equals("No1")) return SoundChannel.No1;
+        else if (soundChannel.equals("No2")) return SoundChannel.No2;
+        else return SoundChannel.No1;
     }
 
     private ICommandBuilder.CutPaperAction getCutPaperAction(String cutPaperAction){

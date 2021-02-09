@@ -1377,6 +1377,10 @@ static NSString *dataCallbackId = nil;
             }
             else [builder appendBitmap:image diffusion:diffusion width:width bothScale:bothScale rotation:rotation];
         }
+        else if ([command valueForKey:@"appendSound"]) {
+            NSInteger repeat = ([command valueForKey:@"repeat"]) ? [[command valueForKey:@"repeat"] intValue] : 1;
+            [builder appendSound:[self getSoundChannel:[command valueForKey:@"appendSound"]] repeat:repeat];
+        }
         
     }
     
@@ -1491,6 +1495,15 @@ static NSString *dataCallbackId = nil;
         else return SCBCodePageTypeCP998;
     } else
         return SCBCodePageTypeCP998;
+}
+
+-(SCBSoundChannel)getSoundChannel:(NSString *)soundChannel {
+    if (soundChannel != nil && soundChannel != (id)[NSNull null]) {
+        if ([soundChannel isEqualToString:@"No1"]) return SCBPeripheralChannelNo1;
+        else if ([soundChannel isEqualToString:@"No2"]) return SCBPeripheralChannelNo2;
+        else return SCBPeripheralChannelNo1;
+    } else
+        return SCBPeripheralChannelNo1;
 }
 
 -(SCBCutPaperAction)getCutPaperAction:(NSString *)cutPaperAction {

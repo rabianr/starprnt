@@ -439,6 +439,8 @@ window.addEventListener('starPrntData', function (e) {
 | bothScale: boolean| Property to be used with the appendBitmap command. Height is changed according to the conversion rate of the width property. true = Valid, false = Invalid. Default true. Example:  ```{appendBitmap:uri, bothScale: true }``` |
 | rotation: string|Property to be used with the appendBitmap command. Choose the format of the return value defined in  [BitmapConverterRotation](#bitmapconverterrotation) Example: ```{appendBitmap:uri, rotation:'Left90'}```
 | openCashDrawer: number;| Sends a appendPeripheral command to the printer for channel number: Example: ```{openCashDrawer:1}``` |
+| appendSound: string | Sound/Buzzer command is generated and added to the command buffer. Choose the format of the return value defined in [SoundChannel](#SoundChannel). Example: ```{appendSound: 'No1'}``` |
+| repeat: number | Property to be used with the appendSound command. Repeat count. Default 1. Example: ```{appendSound: 'No1', repeat: 3}``` |
 
 ## PrintCommand Constants
 
@@ -591,6 +593,11 @@ Values for the PrintCommand properties. (Case and type sensitive)
     Left90 = 'Left90',
     Right90 = 'Right90',
     Rotate180 = 'Rotate180'
+
+### SoundChannel
+
+    No1 = 'No1'
+    No2 = 'No2'
 
 ### Emulation
 
